@@ -162,11 +162,10 @@ struct Graph* dynamic_graph_creation(int vertices)
 // Function to free the allocated memory preventing memory leak
 // The function takes one argument:
 // 1. The already initialized graph (struct Graph* graph)
-void free_memory(struct Graph* graph, struct Node* node)
+void free_memory(struct Graph* graph)
 {
     for(int i = 0; i < graph->ver; i++) 
     {
-        free(node);
         free(graph->adj[i]->name);
     }
 
