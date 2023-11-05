@@ -1,7 +1,7 @@
 #ifndef DYNAMIC_GRAPH_CREATION
 #define DYNAMIC_GRAPH_CREATION
 
-#define SIZE_NAME 20
+#define MAX_NAME_SIZE 20
 
 // Declaring the nodes in the graph with arguments:
 // 1. The cost of the node
@@ -21,13 +21,15 @@ struct Graph
     struct Node **adj;
 };
 
+int get_vertices(void);
+
 int get_cost(void);
 
 int get_pos_x(int vertices);
 
 int get_pos_y(int vertices);
 
-int add_edge(struct Graph* graph, int cost, int position_x, int position_y, char name[]);
+void add_edge(struct Graph* graph, int position_x, int position_y, char* name, int cost);
 
 char* get_name(void);
 

@@ -11,7 +11,7 @@ char* searching_name(struct Graph* graph, int index_of_searched_name)
 {   
     int i, j, validation_index = 0;
 
-    // Irritating the graph only under the main diagonal
+    // Irritating the graph only over the main diagonal
     for(i = 0; i < graph->ver; i++)
     {
         for(j = i; j < graph->ver; j++)

@@ -16,8 +16,6 @@
 
 #include "dynamic_graph_creation.h"
 
-int get_vertices(void);
-
 int accept_arrow_input(struct Graph* graph, int vertices);
 
 #endif
