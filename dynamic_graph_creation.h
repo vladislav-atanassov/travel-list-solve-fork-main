@@ -29,7 +29,7 @@ int get_pos_y(int vertices);
 
 int add_edge(struct Graph* graph, int cost, int position_x, int position_y, char name[]);
 
-char* get_name(struct Graph* graph, int pos_x, int pos_y);
+char* get_name(void);
 
 struct Graph* dynamic_graph_creation(int vertices);
 

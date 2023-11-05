@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <conio.h>
 
 #include "accept_arrow_input.h"
@@ -10,7 +11,7 @@ int get_vertices(void)
 {
     int vertices;
     
-    while(1)
+    while(true)
     {
         printf("Enter number of nodes: ");
         scanf("%d", &vertices);
@@ -46,7 +47,7 @@ int accept_arrow_input(struct Graph* graph, int vertices)
 
     vertices--; // Preventing last element not existing and returning INT_MAX distance
 
-    while(1) 
+    while(true) 
     {  
         point = getch();
         

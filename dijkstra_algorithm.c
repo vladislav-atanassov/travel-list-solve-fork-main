@@ -14,13 +14,12 @@
 int min_distance(int dist[], int visited[], int vertices) 
 {
     int min = INFINITY;
-	unsigned int min_index, i;
+	int min_index, i;
 
-    for (i = 0; i < vertices; i++) 
+    for(i = 0; i < vertices; i++) 
     {
         // If the node is not visited and the current distance
         // is shorter assign it to the new value
-
         if((visited[i] == 0) && (dist[i] <= min)) 
         {
             min = dist[i];
@@ -42,11 +41,10 @@ void dijkstra_algorithm(struct Graph* graph, int source, int vertices)
 	int visited[vertices];  // Keeps track of that if the node has been visited or not (0, 1)
     int parent[vertices];   // Keeps the index of the minimum path. Then to be used in "showing_path()"
     int dist[vertices];     // Keeps the current distances to each point and updates if found shorter path
-    unsigned int i;
+    int i;
 
 	// Assigning all the nodes as INFINITY
-
-    for (i = 0; i < vertices; i++) 
+    for(i = 0; i < vertices; i++) 
     {
         dist[i] = INFINITY;
         visited[i] = 0;
@@ -54,40 +52,34 @@ void dijkstra_algorithm(struct Graph* graph, int source, int vertices)
     }
 
 	// Consider the source node as visited
-
     dist[source] = 0;
 
     // Dijkstra's algorithm for finding the shortest path
-
     for (int count = 0; count < vertices - 1; count++) 
     {
-        int min = min_distance(dist, visited, vertices);   // Get the shortest distance to a neighboring node
-        visited[min] = 1;                       // Assign the current node as visited
-
-        for (i = 0; i < vertices; i++) 
+        int min_dist = min_distance(dist, visited, vertices);
+        visited[min_dist] = 1;    // Assign the current node as visited
+        
+        for (i = count; i < vertices; i++) 
 		{
             // First if statement: 
             // If the node has not been visited and it has a connection to the current one
 
             // Second if statement:
             // If the distance is not INFINITY and the current distance is shorter than the previous one 
-            
-            if ((!visited[i] && graph->adj[min][i].cost) && ((dist[min] != INFINITY) && 
-                (dist[min] + graph->adj[min][i].cost < dist[i]))) 
+            if ((!visited[i] && graph->adj[min_dist][i].cost) && 
+                ((dist[min_dist] != INFINITY) && 
+                (dist[min_dist] + graph->adj[min_dist][i].cost < dist[i]))) 
             {
                 // Assign the distance as the current distance
-                
-                dist[i] = dist[min] + graph->adj[min][i].cost;    
+                dist[i] = dist[min_dist] + graph->adj[min_dist][i].cost;    
                 
                 // Assign the current parent with the 
                 // index of the nearest neighboring node
-                
-                parent[i] = min;                        
+                parent[i] = min_dist;                        
             }
         }
     }
-
-	// Printing the solution 
 
     print_solution(graph, parent, dist, source);
 }

@@ -9,12 +9,9 @@
 // 2. The inxex of  the searched name
 char* searching_name(struct Graph* graph, int index_of_searched_name)
 {   
-    int i, j, validation_index;
-
-    validation_index = 0; // Starting from the first element
+    int i, j, validation_index = 0;
 
     // Irritating the graph only under the main diagonal
-
     for(i = 0; i < graph->ver; i++)
     {
         for(j = i; j < graph->ver; j++)
@@ -27,13 +24,12 @@ char* searching_name(struct Graph* graph, int index_of_searched_name)
                 }
 
                 // If the validation_index is not the searched one continue to the next one
-                
                 validation_index++;
             }
         }
     }
     
-    // Returning NULL pointer in case there is no suzch index or empty array
+    // Returning NULL pointer in case there is no such index or empty array
     return NULL; 
 }
 
@@ -45,19 +41,16 @@ char* searching_name(struct Graph* graph, int index_of_searched_name)
 void showing_path(struct Graph* graph, int parent[], int end, int distance[]) 
 {
     // Checking if the node is the source node
-
-    if (parent[end] == -1) 
+    if(parent[end] == -1) 
 	{
         printf("%s", searching_name(graph, end));
         return;
     }
 
     // Recursivly returning the function to find the next node
-
     showing_path(graph, parent, parent[end], distance);
 
     // Printing the path
-
     printf(" => %s, %d;", searching_name(graph, end), distance[end]);
 }
 
@@ -85,7 +78,8 @@ void print_solution(struct Graph* graph, int parent[], int distance[], int sourc
     {
         if(end != source)                       // Do not print the path from source to source (will always be 0)
         {
-	        printf("The shortest path from '%s' to '%s' is: ", searching_name(graph, source), searching_name(graph, end));
+	        printf("The shortest path from '%s' to '%s' is: ", 
+                    searching_name(graph, source), searching_name(graph, end));
 
 	        showing_path(graph, parent, end, distance);
             printf("\n");
