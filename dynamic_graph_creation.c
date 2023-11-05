@@ -38,15 +38,14 @@ int get_pos_x(int vertices)
         scanf("%d", &position_x);
         
         // Validating out of bounds error
-        if(position_x > 0 || position_x < vertices - 1) 
+        if(position_x > 0 || (position_x < (vertices - 1))) 
         {
+            printf("Done X pos");
             return position_x;
         }
 
         printf("Ivalid input for X axis!\n");      
     }
-
-    printf("Done");
 }
 
 // Function to get the Y axis position of the node
@@ -91,7 +90,7 @@ char* get_name(void)
 
 // Function that inserts a node into the graph
 // The function takes five arguments:
-int add_edge(struct Graph* graph, int cost, int position_x, int position_y, char name[])
+int add_edge(struct Graph* graph, int cost, int position_x, int position_y, char* name)
 {
     // Validation to add only under the main diagonal and
     // assigning the name and cost of the node in the graph
@@ -114,7 +113,7 @@ int add_edge(struct Graph* graph, int cost, int position_x, int position_y, char
 // 1. The size of the matrix int vertices
 struct Graph* dynamic_graph_creation(int vertices)
 {
-    int i, j, temp_x, temp_y;
+    int i, j;
 
     // Allocate memory for the graph structure
     struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));  
@@ -139,17 +138,10 @@ struct Graph* dynamic_graph_creation(int vertices)
         graph->adj[i][j].name = NULL;
     }
 
-    i = 0;
-
-    do
+    for(i = 0; i < vertices; i++)
     {
-        temp_x = get_pos_x(vertices);
-        temp_y = get_pos_y(vertices);
-
-        add_edge(graph, get_cost(), temp_x, temp_y, get_name());
-            
-        i++;
-    } while(i < vertices);
+        add_edge(graph, get_cost(), get_pos_x(vertices), get_pos_y(vertices), get_name());
+    }
 
     return graph;   // Return the initialized graph
 }
