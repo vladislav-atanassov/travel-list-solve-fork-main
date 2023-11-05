@@ -96,7 +96,7 @@ char* get_name(struct Graph* graph, int pos_x, int pos_y)
     while(1)
     {
         printf("Enter name for the node: ");
-        scanf("%.20s", name);
+        scanf("%s", name);
 
         char* temp_name = (char*)realloc(name, sizeof(char) * strlen(name));
 
