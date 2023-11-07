@@ -7,11 +7,9 @@
 
 int main() 
 {	
-    int vertices = get_vertices();
+    struct Graph* graph = dynamic_graph_creation();
 
-    struct Graph* graph = dynamic_graph_creation(vertices);
-
-    dijkstra_algorithm(graph, accept_arrow_input(graph, vertices), vertices);
+    dijkstra_algorithm(graph, accept_arrow_input(graph));
 
     free_memory(graph);
 

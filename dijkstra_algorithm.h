@@ -5,6 +5,6 @@
 
 int min_distance(int dist[], int visited[], int vertices);
 
-void dijkstra_algorithm(struct Graph* graph, int source, int vertices);
+void dijkstra_algorithm(struct Graph* graph, int source);
 
 #endif

@@ -36,23 +36,16 @@ int get_cost(void)
     while(true)
     {
         printf("Enter cost for the node: ");
-        if (scanf("%d", &cost) != 1) {
-            printf("Invalid input for cost!\n");
-            while (getchar() != '\n'); // Clear input buffer
-            continue;
-        }
+        scanf("%d", &cost);
 
-        if(cost > 0) // Validating the cost of the node
+        if(cost > 0)
         {
-            while (getchar() != '\n'); // Clear input buffer
             return cost;
         }
 
         printf("Invalid input for cost!\n");
-        while (getchar() != '\n'); // Clear input buffer
     }
 }
-
 
 // Function to get the X axis position of the node
 // The function takes one argument
@@ -98,20 +91,18 @@ int get_pos_y(int vertices)
     }
 }
 
-char* get_name(void) {
+char* get_name(void) 
+{
     char* name = (char *)malloc(sizeof(char) * MAX_NAME_SIZE); // Adjust the size as needed
     
-    while(true) {
+    while(true) 
+    {
         printf("Enter name for the node: ");
-        fgets(name, MAX_NAME_SIZE, stdin); // Read the string safely using fgets
+        scanf("%s", name);
 
-        // Remove the newline character if present
-        size_t len = strlen(name);
-        if (name[len - 1] == '\n') {
-            name[len - 1] = '\0';
-        }
-
-        if (strlen(name) > 0) {
+        if(name != NULL &&
+            strlen(name) > 0 && strlen(name) < MAX_NAME_SIZE) 
+        {
             return name;
         }
 
@@ -119,57 +110,51 @@ char* get_name(void) {
     }
 }
 
-
-
 // Function that inserts a node into the graph
 // The function takes five arguments:
 void add_edge(struct Graph* graph, int position_x, int position_y, char* name, int cost)
 {
-    // Validation to add only under the main diagonal and
-    // assigning the name and cost of the node in the graph
-    if(position_x <= position_y)
-    {
-        graph->adj[position_x][position_y].cost = cost;
-        graph->adj[position_x][position_y].name= name;
-    }
-    else
-    {
-        graph->adj[position_y][position_x].cost = cost;
-        graph->adj[position_y][position_x].name = name;
-    }
+    // Assignning the cost of the node in the graph
+    graph->adj[position_x][position_y].cost = cost;
+    graph->adj[position_y][position_x].cost = cost;
+    
+    // Assigning the name of the node in the graph
+    graph->adj[position_x][position_y].name= name;
+    graph->adj[position_y][position_x].name = name;
 }
 
 // Function that creates a dynamic adjacency matrix
 // The function takes one argument:
 // 1. The size of the matrix int vertices
-struct Graph* dynamic_graph_creation(int vertices) {
+struct Graph* dynamic_graph_creation(void) 
+{
     int i = 0;
 
     // Allocate memory for the graph structure
     struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));  
-    graph->ver = vertices; // Assign the number of vertices in the structure
+    graph->ver = get_vertices(); // Assign the number of vertices in the structure
 
     // Allocate memory for the adjacency matrix
-    graph->adj = (struct Node**)malloc(sizeof(struct Node*) * (size_t)vertices);
+    graph->adj = (struct Node**)malloc(sizeof(struct Node*) * (size_t)graph->ver);
     
-    for(i = 0; i < vertices; i++) 
+    for(i = 0; i < graph->ver; i++) 
     {
-        graph->adj[i] = (struct Node*)malloc(sizeof(struct Node) * (size_t)vertices);
+        graph->adj[i] = (struct Node*)malloc(sizeof(struct Node) * (size_t)graph->ver);
     }
 
     // Initialize the adjacency matrix with 0 and NULL
-    for(i = 0; i < vertices; i++)
+    for(i = 0; i < graph->ver; i++)
     {
-        for(int j = 0; j < vertices; j++) 
+        for(int j = 0; j < graph->ver; j++) 
         {
             graph->adj[i][j].cost = 0;
             graph->adj[i][j].name = NULL;
         }
     }
 
-    for(i = 0; i < vertices; i++) 
+    for(i = 0; i < graph->ver; i++) 
     {
-        add_edge(graph, get_pos_x(vertices), get_pos_y(vertices), get_name(), get_cost());
+        add_edge(graph, get_pos_x(graph->ver), get_pos_y(graph->ver), get_name(), get_cost());
     }
 
     return graph;   // Return the initialized graph

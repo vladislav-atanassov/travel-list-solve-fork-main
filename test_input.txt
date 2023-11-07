@@ -9,8 +9,8 @@ Beta
 0
 2
 Gama
+3
 2
-1
 5
 Delta
 1

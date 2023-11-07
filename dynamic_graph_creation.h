@@ -33,7 +33,7 @@ void add_edge(struct Graph* graph, int position_x, int position_y, char* name, i
 
 char* get_name(void);
 
-struct Graph* dynamic_graph_creation(int vertices);
+struct Graph* dynamic_graph_creation(void);
 
 void free_memory(struct Graph* graph);
 

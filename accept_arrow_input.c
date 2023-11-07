@@ -6,24 +6,19 @@
 #include "print_solution.h" 
 #include "dynamic_graph_creation.h"
 
-// Function to accept the input for a starting point
-// through using the left and right arrow on the keyboard
-// It always starts from the first point ('A') and by pressing the arrows
-// it goes to the next one. If it has come to the end pressed right arrow at the
+// Function to accept the input for a starting point through using the left and right arrow on the keyboard
+// By pressing the arrows it goes to the next one. If it has come to the end pressed right arrow at the
 // last point and goes at the first and if pressed left at the first it goes to the last.
-// The function takes two arguments:
-// 1. The already declarated
+// The function takes one argument:
+// 1. The already declarated graph
 // NOTE: THE FUNCTION RESPONDS ONLY TO THE FUNCTIONAL KEYS ('<-', '->', 'ENTER').
-int accept_arrow_input(struct Graph* graph, int vertices)
+int accept_arrow_input(struct Graph* graph)
 {
-    int point;
-    int i = 0;
+    int point, i = 0;
+    int vertices = graph->ver - 1;  // Preventing last element not existing and returning INT_MAX distance
 
     printf("Choose starting point.\n");
-
-    printf("Your current choice is point %s.\n", searching_name(graph, i));
-
-    vertices--; // Preventing last element not existing and returning INT_MAX distance
+    printf("Your current choice is point %s.\n", graph->adj[0]->name);
 
     while(true) 
     {  
@@ -39,7 +34,7 @@ int accept_arrow_input(struct Graph* graph, int vertices)
 
                 if(i > vertices)
                 {
-                    i -= vertices;              // Go to the beginning if the choice becomes unavailable
+                    i -= vertices + 1;              // Go to the beginning if the choice becomes unavailable
                 }
                 
                 printf("Your current choice is point %s.\n", searching_name(graph, i));
@@ -50,7 +45,7 @@ int accept_arrow_input(struct Graph* graph, int vertices)
 
                 if(i < 0)
                 {
-                    i += vertices;              // Go to the end if the choice becomes unavailable
+                    i += vertices + 1;              // Go to the end if the choice becomes unavailable
                 }
 
                 printf("Your current choice is point %s.\n", searching_name(graph, i));
