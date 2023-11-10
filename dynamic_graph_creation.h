@@ -25,9 +25,7 @@ int get_vertices(void);
 
 int get_cost(void);
 
-int get_pos_x(int vertices);
-
-int get_pos_y(int vertices);
+int get_position(int vertices, const char* message);
 
 void add_edge(struct Graph* graph, int position_x, int position_y, char* name, int cost);
 

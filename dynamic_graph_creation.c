@@ -47,47 +47,26 @@ int get_cost(void)
     }
 }
 
-// Function to get the X axis position of the node
+// Function to get the X or Y axis position of the node
 // The function takes one argument
 // 1. The size of the matrix int vertices
-int get_pos_x(int vertices)
+// 2. Approapriate message for the input
+int get_position(int vertices, const char* message)
 {
-    int position_x;
+    int position;
 
     while(true)
     {
-        printf("Enter position for the edge on the X axis: ");
-        scanf("%d", &position_x);
+        printf("Enter position for the edge on the %s: ", message);
+        scanf("%d", &position);
         
         // Validating out of bounds error
-        if(position_x >= 0 && (position_x < vertices)) 
+        if(position >= 0 && (position < vertices))
         {
-            return position_x;
+            return position;
         }
 
-        printf("Ivalid input for X axis!\n");      
-    }
-}
-
-// Function to get the Y axis position of the node
-// The function takes one argument
-// 1. The size of the matrix int vertices
-int get_pos_y(int vertices)
-{
-    int position_y;
-
-    while(true)
-    {
-        printf("Enter position for the edge on the Y axis: ");
-        scanf("%d", &position_y);
-        
-        // Validating out of bounds error
-        if(position_y >= 0 && (position_y < vertices))
-        {
-            return position_y;
-        }
-
-        printf("Ivalid input for Y axis!\n");     
+        printf("Ivalid input for %s!\n", message);     
     }
 }
 
@@ -154,7 +133,7 @@ struct Graph* dynamic_graph_creation(void)
 
     for(i = 0; i < graph->ver; i++) 
     {
-        add_edge(graph, get_pos_x(graph->ver), get_pos_y(graph->ver), get_name(), get_cost());
+        add_edge(graph, get_position(graph->ver, "X axis"), get_position(graph->ver, "Y axis"), get_name(), get_cost());
     }
 
     return graph;   // Return the initialized graph

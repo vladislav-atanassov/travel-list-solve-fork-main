@@ -18,7 +18,7 @@ int accept_arrow_input(struct Graph* graph)
     int vertices = graph->ver - 1;  // Preventing last element not existing and returning INT_MAX distance
 
     printf("Choose starting point.\n");
-    printf("Your current choice is point %s.\n", graph->adj[0]->name);
+    printf("Your current choice is point %s.\n", searching_name(graph, 0));
 
     while(true) 
     {  
